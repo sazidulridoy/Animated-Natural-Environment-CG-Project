@@ -41,19 +41,32 @@ void drawCircle(float cx, float cy, float r)
     glEnd();
 }
 
-void drawSun()
+void drawSunMoon()
 {
+    if (!isNight)
+    {
+        float sx = -85.0f + sunAngle;
+        float sy = 85.0f;
 
-        glColor3f(1,0.9,0);
-        drawCircle(70 + sunPos, 80, 8);
+        // Sun glow (soft halo)
+        glColor4f(1.0f, 0.95f, 0.50f, 0.15f);
+        drawCircle(sx, sy, 16);
+        glColor4f(1.0f, 0.92f, 0.30f, 0.25f);
+        drawCircle(sx, sy, 12);
 
+        // Sun body
+        glColor3f(1.0f, 0.95f, 0.10f);
+        drawCircle(sx, sy, 8);
+
+
+    }
 }
 
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glPushMatrix();
-    drawSun();
+    drawSunMoon();
 
     glPopMatrix();
     glutSwapBuffers();
