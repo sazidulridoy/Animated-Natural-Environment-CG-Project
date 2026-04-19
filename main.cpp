@@ -43,7 +43,7 @@ void drawCircle(float cx, float cy, float r)
 
 void drawSunMoon()
 {
-    if (!isNight)
+    if (isNight)
     {
         float sx = -85.0f + sunAngle;
         float sy = 85.0f;
@@ -71,7 +71,15 @@ void drawSunMoon()
         glEnd();
         glLineWidth(1.0f);
     }
-
+    else
+    {
+        // Moon
+        glColor3f(0.95f, 0.95f, 0.85f);
+        drawCircle(75, 82, 7);
+        // Crescent shadow
+        glColor3f(0.05f, 0.05f, 0.18f);
+        drawCircle(78, 82, 6);
+    }
 }
 
 void display()
