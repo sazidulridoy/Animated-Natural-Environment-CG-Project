@@ -58,8 +58,20 @@ void drawSunMoon()
         glColor3f(1.0f, 0.95f, 0.10f);
         drawCircle(sx, sy, 8);
 
-
+        // Sun rays
+        glColor3f(1.0f, 0.90f, 0.20f);
+        glLineWidth(1.5f);
+        glBegin(GL_LINES);
+        for (int i = 0; i < 12; i++)
+        {
+            float a = i * 3.14159f / 6.0f;
+            glVertex2f(sx + cos(a) * 10, sy + sin(a) * 10);
+            glVertex2f(sx + cos(a) * 15, sy + sin(a) * 15);
+        }
+        glEnd();
+        glLineWidth(1.0f);
     }
+
 }
 
 void display()

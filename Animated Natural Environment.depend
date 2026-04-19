@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1776610407 source:c:\users\ridoy\documents\cg project\animated natural environment\main.cpp
+1776610764 source:c:\users\ridoy\documents\cg project\animated natural environment\main.cpp
 	<GL/glut.h>
 	<math.h>
 	<stdlib.h>
