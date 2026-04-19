@@ -85,7 +85,7 @@ void drawSunMoon()
 //sky
 void drawSky()
 {
-    if (!isNight)
+    if (isNight)
     {
         // Gradient sky
         glBegin(GL_QUADS);
@@ -102,6 +102,18 @@ void drawSky()
         glVertex2f(-100, 40);
         glVertex2f(100, 40);
         glColor3f(0.80f, 0.92f, 1.0f);
+        glVertex2f(100, 0);
+        glVertex2f(-100, 0);
+        glEnd();
+    }
+      else
+    {
+        // Night sky
+        glBegin(GL_QUADS);
+        glColor3f(0.02f, 0.02f, 0.12f);
+        glVertex2f(-100, 100);
+        glVertex2f(100, 100);
+        glColor3f(0.05f, 0.05f, 0.20f);
         glVertex2f(100, 0);
         glVertex2f(-100, 0);
         glEnd();
