@@ -43,7 +43,7 @@ void drawCircle(float cx, float cy, float r)
 
 void drawSunMoon()
 {
-    if (isNight)
+    if (!isNight)
     {
         float sx = -85.0f + sunAngle;
         float sy = 85.0f;
@@ -82,10 +82,38 @@ void drawSunMoon()
     }
 }
 
+//sky
+void drawSky()
+{
+    if (!isNight)
+    {
+        // Gradient sky
+        glBegin(GL_QUADS);
+        glColor3f(0.15f, 0.45f, 0.90f);
+        glVertex2f(-100, 100);
+        glVertex2f(100, 100);
+        glColor3f(0.55f, 0.80f, 1.0f);
+        glVertex2f(100, 40);
+        glVertex2f(-100, 40);
+        glEnd();
+
+        glBegin(GL_QUADS);
+        glColor3f(0.55f, 0.80f, 1.0f);
+        glVertex2f(-100, 40);
+        glVertex2f(100, 40);
+        glColor3f(0.80f, 0.92f, 1.0f);
+        glVertex2f(100, 0);
+        glVertex2f(-100, 0);
+        glEnd();
+    }
+
+}
+
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glPushMatrix();
+    drawSky();
     drawSunMoon();
 
     glPopMatrix();
