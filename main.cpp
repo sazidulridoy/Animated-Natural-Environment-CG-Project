@@ -2,7 +2,32 @@
 #include <math.h>
 #include <stdlib.h>
 
-float sunPos = 0.0f;
+// Animation variables
+float cloudPos = 0.0f;
+float sunAngle = 0.0f;
+float birdPos = 0.0f;
+float waterOffset = 0.0f;
+float fogAlpha = 0.0f;
+float timeOfDay = 0.0f;  // 0=day, increases
+
+bool isNight = false;
+bool isRaining = false;
+
+// Rain
+float rainX[300];
+float rainY[300];
+
+// Stars
+float starX[150];
+float starY[150];
+float starBright[150];
+
+// Fireflies
+float ffX[20];
+float ffY[20];
+float ffBright[20];
+float ffTimer[20];
+
 
 void drawCircle(float cx, float cy, float r)
 {
