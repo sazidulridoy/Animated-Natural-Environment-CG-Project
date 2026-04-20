@@ -159,6 +159,43 @@ void drawClouds()
     drawCloud(-120 + cloudPos, 85, 0.60f);
     drawCloud(80 + cloudPos, 80, 0.85f);
 }
+void drawMountains()
+{
+    // Far mountains (lighter, atmospheric haze)
+    glColor3f(0.55f, 0.52f, 0.60f);
+    glBegin(GL_TRIANGLES);
+    glVertex2f(-100, 0); glVertex2f(-45, 55); glVertex2f(10, 0);
+    glVertex2f(-10, 0);  glVertex2f(45, 48);  glVertex2f(100, 0);
+    glEnd();
+
+    // Near mountains (richer brown)
+    glColor3f(0.38f, 0.28f, 0.20f);
+    glBegin(GL_TRIANGLES);
+    glVertex2f(-100, 0); glVertex2f(-62, 48); glVertex2f(-22, 0);
+    glVertex2f(-32, 0);  glVertex2f(8, 58);   glVertex2f(48, 0);
+    glVertex2f(18, 0);   glVertex2f(62, 40);  glVertex2f(100, 0);
+    glEnd();
+
+    // Rocky detail overlay (slightly lighter mid-tone)
+    glColor3f(0.50f, 0.38f, 0.28f);
+    glBegin(GL_TRIANGLES);
+    glVertex2f(-75, 10); glVertex2f(-62, 48); glVertex2f(-50, 10);
+    glVertex2f(-10, 8);  glVertex2f(8, 58);   glVertex2f(25, 8);
+    glVertex2f(35, 8);   glVertex2f(62, 40);  glVertex2f(80, 8);
+    glEnd();
+
+    // Snow caps
+    glColor3f(0.95f, 0.96f, 0.98f);
+    glBegin(GL_TRIANGLES);
+    // Peak 1
+    glVertex2f(-70, 30); glVertex2f(-62, 48); glVertex2f(-54, 30);
+    // Peak 2
+    glVertex2f(0, 40);  glVertex2f(8, 58);  glVertex2f(16, 40);
+    // Peak 3 (far)
+    glVertex2f(-50, 38); glVertex2f(-45, 55); glVertex2f(-40, 38);
+    glEnd();
+}
+
 
 void display()
 {
