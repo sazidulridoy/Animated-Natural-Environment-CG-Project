@@ -132,6 +132,33 @@ void drawSky()
     }
 
 }
+void drawCloud(float cx, float cy, float scale)
+{
+    if (isNight) glColor3f(0.55f, 0.55f, 0.65f);
+    else glColor3f(0.98f, 0.98f, 0.98f);
+
+    // Fluffy multi-circle cloud
+    drawEllipse(cx, cy, 10 * scale, 6 * scale);
+    drawEllipse(cx - 7 * scale, cy - 1 * scale, 7 * scale, 4.5f * scale);
+    drawEllipse(cx + 7 * scale, cy - 1 * scale, 7 * scale, 4.5f * scale);
+    drawEllipse(cx - 4 * scale, cy + 2.5f * scale, 6 * scale, 3.5f * scale);
+    drawEllipse(cx + 4 * scale, cy + 2.5f * scale, 6 * scale, 3.5f * scale);
+
+    // Slightly darker base for depth
+    if (!isNight)
+        glColor3f(0.88f, 0.90f, 0.92f);
+    else
+        glColor3f(0.45f, 0.46f, 0.52f);
+    drawEllipse(cx, cy + 3.5f * scale, 9 * scale, 3 * scale);
+}
+
+void drawClouds()
+{
+    drawCloud(-55 + cloudPos, 78, 1.0f);
+    drawCloud(25 + cloudPos, 72, 0.75f);
+    drawCloud(-120 + cloudPos, 85, 0.60f);
+    drawCloud(80 + cloudPos, 80, 0.85f);
+}
 
 void display()
 {
