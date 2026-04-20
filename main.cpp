@@ -353,6 +353,38 @@ void drawWaterEdge()
     glEnd();
 }
 
+void drawEdgeGrass()
+{
+    glLineWidth(1.2f);
+    for (int i = -100; i < 100; i += 2)
+    {
+        float h = (float)((i * 17 + 43) % 6) + 3.0f;
+        float lean = sin(i * 0.7f) * 1.5f;
+
+        // Darker back blades
+        glColor3f(0.10f, 0.55f, 0.10f);
+        glBegin(GL_LINES);
+        glVertex2f(i, -40);
+        glVertex2f(i + lean * 0.5f, -40 + h * 0.7f);
+        glEnd();
+
+        // Bright front blades
+        glColor3f(0.20f, 0.75f, 0.20f);
+        glBegin(GL_LINES);
+        glVertex2f(i + 0.5f, -40);
+        glVertex2f(i + lean + 0.5f, -40 + h);
+        glEnd();
+    }
+    glLineWidth(1.0f);
+}
+
+
+
+
+
+
+
+
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
