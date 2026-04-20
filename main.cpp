@@ -479,6 +479,32 @@ void drawTree(float x, float y)
     drawCircle(x + 1.5f, y + 13.5f, 2.0f);
 }
 
+void drawBushes()
+{
+    struct Bush { float x, y, s; };
+    Bush bushes[] = {
+        {-88, -20, 1.0f},
+        {-68, -20, 0.8f},
+        {55,  -20, 0.9f},
+        {85,  -20, 0.75f},
+        {-35, -20, 0.70f},
+    };
+
+    for (auto& b : bushes)
+    {
+        glColor3f(0.06f, 0.40f, 0.06f);
+        drawCircle(b.x, b.y, 5 * b.s);
+        drawCircle(b.x - 4 * b.s, b.y - 1 * b.s, 3.5f * b.s);
+        drawCircle(b.x + 4 * b.s, b.y - 1 * b.s, 3.5f * b.s);
+
+        glColor3f(0.12f, 0.58f, 0.12f);
+        drawCircle(b.x, b.y + 1 * b.s, 4 * b.s);
+        drawCircle(b.x - 3 * b.s, b.y, 3 * b.s);
+        drawCircle(b.x + 3 * b.s, b.y, 3 * b.s);
+    }
+}
+
+
 
 
 
