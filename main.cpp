@@ -504,6 +504,51 @@ void drawBushes()
     }
 }
 
+void drawBirds()
+{
+    if (isNight) return;
+
+    glColor3f(0.05f, 0.05f, 0.10f);
+    glLineWidth(1.8f);
+
+    // Bird 1 - animated wing flap with sine
+    float flap1 = sin(birdPos * 0.15f) * 3.0f;
+    float bx = -65 + birdPos;
+    float by = 62;
+    glBegin(GL_LINE_STRIP);
+    glVertex2f(bx - 7, by + flap1 * 0.5f);
+    glVertex2f(bx - 3.5f, by + flap1);
+    glVertex2f(bx, by);
+    glVertex2f(bx + 3.5f, by + flap1);
+    glVertex2f(bx + 7, by + flap1 * 0.5f);
+    glEnd();
+
+    // Bird 2 - slightly offset phase
+    float flap2 = sin(birdPos * 0.15f + 1.2f) * 3.0f;
+    float bx2 = -75 + birdPos;
+    float by2 = 57;
+    glBegin(GL_LINE_STRIP);
+    glVertex2f(bx2 - 5, by2 + flap2 * 0.5f);
+    glVertex2f(bx2 - 2.5f, by2 + flap2);
+    glVertex2f(bx2, by2);
+    glVertex2f(bx2 + 2.5f, by2 + flap2);
+    glVertex2f(bx2 + 5, by2 + flap2 * 0.5f);
+    glEnd();
+
+    // Bird 3
+    float flap3 = sin(birdPos * 0.15f + 2.5f) * 2.5f;
+    float bx3 = -55 + birdPos;
+    float by3 = 65;
+    glBegin(GL_LINE_STRIP);
+    glVertex2f(bx3 - 4, by3 + flap3 * 0.5f);
+    glVertex2f(bx3 - 2, by3 + flap3);
+    glVertex2f(bx3, by3);
+    glVertex2f(bx3 + 2, by3 + flap3);
+    glVertex2f(bx3 + 4, by3 + flap3 * 0.5f);
+    glEnd();
+
+    glLineWidth(1.0f);
+}
 
 
 
