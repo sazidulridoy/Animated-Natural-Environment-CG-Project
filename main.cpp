@@ -430,6 +430,54 @@ void drawSmallPlants()
     glLineWidth(1.0f);
 }
 
+void drawTree(float x, float y)
+{
+    // Root flare
+    glColor3f(0.38f, 0.22f, 0.08f);
+    glBegin(GL_TRIANGLES);
+    glVertex2f(x - 2, y);
+    glVertex2f(x + 2, y);
+    glVertex2f(x - 3, y - 3);
+    glEnd();
+
+    // Trunk with texture
+    glColor3f(0.45f, 0.28f, 0.10f);
+    glBegin(GL_QUADS);
+    glVertex2f(x - 1.5f, y);
+    glVertex2f(x + 1.5f, y);
+    glVertex2f(x + 1.2f, y + 10);
+    glVertex2f(x - 1.2f, y + 10);
+    glEnd();
+
+    // Bark detail lines
+    glColor3f(0.35f, 0.20f, 0.07f);
+    glLineWidth(0.8f);
+    glBegin(GL_LINES);
+    glVertex2f(x - 0.5f, y + 2); glVertex2f(x + 0.5f, y + 4);
+    glVertex2f(x - 0.5f, y + 6); glVertex2f(x + 0.5f, y + 8);
+    glEnd();
+    glLineWidth(1.0f);
+
+    // Foliage layers (dark backing -> mid -> highlight tip)
+    // Back / shadow layer
+    glColor3f(0.05f, 0.38f, 0.05f);
+    drawCircle(x, y + 14, 5.5f);
+    drawCircle(x - 3.5f, y + 11, 4.0f);
+    drawCircle(x + 3.5f, y + 11, 4.0f);
+
+    // Mid layer
+    glColor3f(0.10f, 0.55f, 0.10f);
+    drawCircle(x, y + 15, 4.5f);
+    drawCircle(x - 3, y + 12, 3.5f);
+    drawCircle(x + 3, y + 12, 3.5f);
+    drawCircle(x, y + 11, 3.8f);
+
+    // Highlight top
+    glColor3f(0.18f, 0.70f, 0.18f);
+    drawCircle(x, y + 16.5f, 3.0f);
+    drawCircle(x - 1.5f, y + 13.5f, 2.0f);
+    drawCircle(x + 1.5f, y + 13.5f, 2.0f);
+}
 
 
 
