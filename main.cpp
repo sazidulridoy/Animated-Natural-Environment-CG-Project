@@ -378,6 +378,34 @@ void drawEdgeGrass()
     glLineWidth(1.0f);
 }
 
+void drawStones()
+{
+    // Varied stone colors and sizes
+    struct Stone { float x, y, r; float r1, g1, b1; };
+    Stone stones[] = {
+        {-72, -55, 5.0f,  0.50f, 0.48f, 0.46f},
+        {-22, -65, 3.5f,  0.45f, 0.43f, 0.41f},
+        {28,  -50, 6.0f,  0.52f, 0.50f, 0.48f},
+        {62,  -70, 3.0f,  0.48f, 0.46f, 0.44f},
+        {10,  -60, 2.5f,  0.42f, 0.40f, 0.38f},
+        {-50, -75, 4.0f,  0.55f, 0.53f, 0.50f},
+        {45,  -62, 2.0f,  0.46f, 0.44f, 0.42f},
+    };
+
+    for (auto& s : stones)
+    {
+        // Stone shadow
+        glColor3f(s.r1 - 0.12f, s.g1 - 0.12f, s.b1 - 0.12f);
+        drawEllipse(s.x + 1, s.y - 0.5f, s.r * 1.05f, s.r * 0.65f);
+        // Stone body
+        glColor3f(s.r1, s.g1, s.b1);
+        drawEllipse(s.x, s.y, s.r, s.r * 0.65f);
+        // Stone highlight
+        glColor3f(s.r1 + 0.15f, s.g1 + 0.15f, s.b1 + 0.15f);
+        drawEllipse(s.x - s.r * 0.25f, s.y + s.r * 0.15f, s.r * 0.35f, s.r * 0.2f);
+    }
+}
+
 
 
 
