@@ -41,6 +41,18 @@ void drawCircle(float cx, float cy, float r)
     glEnd();
 }
 
+void drawEllipse(float cx, float cy, float rx, float ry)
+{
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex2f(cx, cy);
+    for (int i = 0; i <= 100; i++)
+    {
+        float angle = 2 * 3.14159f * i / 100;
+        glVertex2f(cx + cos(angle) * rx, cy + sin(angle) * ry);
+    }
+    glEnd();
+}
+
 void drawSunMoon()
 {
     if (!isNight)
