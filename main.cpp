@@ -237,6 +237,37 @@ void drawGround()
                 glVertex2f(i + 0.5f, j + 0.5f);
     glEnd();
 }
+void drawRiverBank()
+{
+    // Sandy base
+    glBegin(GL_QUADS);
+    glColor3f(0.78f, 0.68f, 0.45f);
+    glVertex2f(-100, -100);
+    glVertex2f(100, -100);
+    glColor3f(0.72f, 0.62f, 0.40f);
+    glVertex2f(100, -40);
+    glVertex2f(-100, -40);
+    glEnd();
+
+    // Wet sand near water edge
+    glBegin(GL_QUADS);
+    glColor3f(0.60f, 0.52f, 0.36f);
+    glVertex2f(-100, -40);
+    glVertex2f(100, -40);
+    glVertex2f(100, -36);
+    glVertex2f(-100, -36);
+    glEnd();
+
+    // Sand texture
+    glColor3f(0.68f, 0.58f, 0.38f);
+    glPointSize(1.5f);
+    glBegin(GL_POINTS);
+    for (int i = -95; i < 100; i += 3)
+        for (int j = -99; j < -40; j += 3)
+            if ((i * 11 + j * 7) % 8 == 0)
+                glVertex2f(i, j);
+    glEnd();
+}
 
 void display()
 {
