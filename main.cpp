@@ -334,6 +334,24 @@ void drawRiver()
         drawEllipse(0, -30, 12, 3);
     }
 }
+void drawWaterEdge()
+{
+    glBegin(GL_QUADS);
+    glColor3f(0.08f, 0.28f, 0.65f);
+    glVertex2f(-100, -40);
+    glVertex2f(100, -40);
+    glVertex2f(100, -39);
+    glVertex2f(-100, -39);
+    glEnd();
+
+    glBegin(GL_QUADS);
+    glColor4f(0.10f, 0.35f, 0.75f, 0.50f);
+    glVertex2f(-100, -20);
+    glVertex2f(100, -20);
+    glVertex2f(100, -21);
+    glVertex2f(-100, -21);
+    glEnd();
+}
 
 void display()
 {
