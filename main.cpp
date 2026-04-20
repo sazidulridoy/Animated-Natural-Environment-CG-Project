@@ -268,6 +268,72 @@ void drawRiverBank()
                 glVertex2f(i, j);
     glEnd();
 }
+void drawRiver()
+{
+    // Base water
+    glBegin(GL_QUADS);
+    if (!isNight)
+        glColor3f(0.18f, 0.50f, 0.85f);
+    else
+        glColor3f(0.08f, 0.12f, 0.35f);
+    glVertex2f(-100, -40);
+    glVertex2f(100, -40);
+    glVertex2f(100, -20);
+    glVertex2f(-100, -20);
+    glEnd();
+
+    // River shimmer / depth gradient
+    glBegin(GL_QUADS);
+    if (!isNight)
+        glColor4f(0.25f, 0.65f, 0.95f, 0.30f);
+    else
+        glColor4f(0.10f, 0.20f, 0.55f, 0.30f);
+    glVertex2f(-100, -40);
+    glVertex2f(100, -40);
+    glVertex2f(100, -32);
+    glVertex2f(-100, -32);
+    glEnd();
+
+    // Water ripple lines
+    glLineWidth(1.2f);
+    for (int i = -100; i < 100; i += 8)
+    {
+        float offset = waterOffset;
+        glColor4f(1.0f, 1.0f, 1.0f, 0.50f);
+        glBegin(GL_LINE_STRIP);
+        for (int j = 0; j < 6; j++)
+        {
+            float x = i + j * 1.0f + offset;
+            float y = -30.0f + sin((x + offset) * 0.5f) * 0.4f;
+            glVertex2f(x, y);
+        }
+        glEnd();
+
+        // Second wave layer
+        glColor4f(1.0f, 1.0f, 1.0f, 0.25f);
+        glBegin(GL_LINE_STRIP);
+        for (int j = 0; j < 4; j++)
+        {
+            float x = i + j * 1.0f + offset * 0.6f + 3.0f;
+            float y = -26.0f + sin((x + offset * 0.7f) * 0.8f) * 0.3f;
+            glVertex2f(x, y);
+        }
+        glEnd();
+    }
+    glLineWidth(1.0f);
+
+    // Moon/sun reflection on water
+    if (!isNight)
+    {
+        glColor4f(1.0f, 1.0f, 0.60f, 0.20f);
+        drawEllipse(0, -30, 18, 4);
+    }
+    else
+    {
+        glColor4f(0.90f, 0.90f, 0.80f, 0.15f);
+        drawEllipse(0, -30, 12, 3);
+    }
+}
 
 void display()
 {
