@@ -215,6 +215,28 @@ void drawFog()
     glVertex2f(-100, 25);
     glEnd();
 }
+void drawGround()
+{
+    // Rich green with slight gradient
+    glBegin(GL_QUADS);
+    glColor3f(0.18f, 0.65f, 0.18f);
+    glVertex2f(-100, 0);
+    glVertex2f(100, 0);
+    glColor3f(0.22f, 0.72f, 0.22f);
+    glVertex2f(100, -20);
+    glVertex2f(-100, -20);
+    glEnd();
+
+    // Ground texture dots
+    glColor3f(0.15f, 0.55f, 0.15f);
+    glPointSize(1.5f);
+    glBegin(GL_POINTS);
+    for (int i = -95; i < 100; i += 4)
+        for (int j = -19; j < 0; j += 3)
+            if ((i * 7 + j * 13) % 5 == 0)
+                glVertex2f(i + 0.5f, j + 0.5f);
+    glEnd();
+}
 
 void display()
 {
