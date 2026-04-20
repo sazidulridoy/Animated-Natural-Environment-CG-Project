@@ -406,6 +406,29 @@ void drawStones()
     }
 }
 
+void drawSmallPlants()
+{
+    glLineWidth(1.5f);
+    for (int i = -90; i < 90; i += 15)
+    {
+        float base = -60.0f + sin(i * 0.4f) * 3;
+        glColor3f(0.05f, 0.50f, 0.05f);
+        glBegin(GL_LINES);
+        glVertex2f(i, base);       glVertex2f(i, base + 12);
+        glVertex2f(i, base + 6);   glVertex2f(i - 5, base + 12);
+        glVertex2f(i, base + 6);   glVertex2f(i + 5, base + 12);
+        glEnd();
+
+        // Second offset plant
+        glColor3f(0.10f, 0.45f, 0.10f);
+        glBegin(GL_LINES);
+        glVertex2f(i + 6, base - 4); glVertex2f(i + 6, base + 8);
+        glVertex2f(i + 6, base + 3); glVertex2f(i + 3, base + 8);
+        glVertex2f(i + 6, base + 3); glVertex2f(i + 9, base + 8);
+        glEnd();
+    }
+    glLineWidth(1.0f);
+}
 
 
 
