@@ -196,6 +196,25 @@ void drawMountains()
     glEnd();
 }
 
+void drawFog()
+{
+    // Subtle atmospheric fog at mountain base
+    glColor4f(0.80f, 0.85f, 0.92f, 0.18f);
+    glBegin(GL_QUADS);
+    glVertex2f(-100, 0);
+    glVertex2f(100, 0);
+    glVertex2f(100, 15);
+    glVertex2f(-100, 15);
+    glEnd();
+
+    glColor4f(0.80f, 0.85f, 0.92f, 0.08f);
+    glBegin(GL_QUADS);
+    glVertex2f(-100, 15);
+    glVertex2f(100, 15);
+    glVertex2f(100, 25);
+    glVertex2f(-100, 25);
+    glEnd();
+}
 
 void display()
 {
