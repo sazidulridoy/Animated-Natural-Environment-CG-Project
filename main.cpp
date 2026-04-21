@@ -610,12 +610,35 @@ void drawRain()
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    glPushMatrix();
-    drawSky();
-    drawSunMoon();
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    glPopMatrix();
-    glutSwapBuffers();
+    drawSky();
+    drawStars();
+    drawSunMoon();
+    drawClouds();
+    drawMountains();
+    drawFog();
+    drawGround();
+
+    drawTree(-80, -20);
+    drawTree(-52, -20);
+    drawTree(40, -20);
+    drawTree(72, -20);
+    drawBushes();
+
+    drawRiverBank();
+    drawRiver();
+    drawWaterEdge();
+    drawEdgeGrass();
+    drawStones();
+    drawSmallPlants();
+
+    drawBirds();
+    drawFireflies();
+    drawRain();
+
+    glFlush();
 }
 
 void init()
