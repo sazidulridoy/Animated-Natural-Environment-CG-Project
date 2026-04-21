@@ -665,6 +665,38 @@ void update(int v)
             rainX[i] = (float)(rand() % 220) - 110;
         }
     }
+ // Star twinkle
+    for (int i = 0; i < 150; i++)
+    {
+        starBright[i] = 0.5f + 0.5f * sin(v * 0.003f + i * 1.3f);
+    }
+
+    // Firefly update
+    for (int i = 0; i < 20; i++)
+    {
+        ffTimer[i] -= 0.016f;
+        if (ffTimer[i] < 0)
+        {
+            ffBright[i] = 0.0f;
+            if (ffTimer[i] < -1.5f)
+            {
+                ffTimer[i] = (float)(rand() % 30) / 10.0f + 0.5f;
+                ffX[i] = (float)(rand() % 160) - 80;
+                ffY[i] = (float)(rand() % 40) - 60;
+                ffBright[i] = 1.0f;
+            }
+        }
+        else
+        {
+            ffBright[i] = ffTimer[i] > 0.5f ? 1.0f : ffTimer[i] * 2.0f;
+            // Gentle drift
+            ffX[i] += sin(v * 0.01f + i) * 0.05f;
+            ffY[i] += cos(v * 0.008f + i * 1.5f) * 0.03f;
+        }
+    }
+
+    glutPostRedisplay();
+    glutTimerFunc(16, update, v + 1);
 
 }
 
