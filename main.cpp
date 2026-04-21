@@ -576,6 +576,35 @@ void drawFireflies()
 }
 
 
+void drawRain()
+{
+    if (!isRaining) return;
+
+    glLineWidth(1.2f);
+    glBegin(GL_LINES);
+    for (int i = 0; i < 300; i++)
+    {
+        float alpha = 0.5f + (i % 3) * 0.15f;
+        glColor4f(0.65f, 0.72f, 1.0f, alpha);
+        glVertex2f(rainX[i], rainY[i]);
+        glVertex2f(rainX[i] + 1.0f, rainY[i] - 4.5f);  // Diagonal for realism
+    }
+    glEnd();
+    glLineWidth(1.0f);
+
+    // Splash dots at ground level
+    glPointSize(2.0f);
+    glBegin(GL_POINTS);
+    for (int i = 0; i < 300; i++)
+    {
+        if (rainY[i] < -39 && rainY[i] > -42)
+        {
+            glColor4f(0.70f, 0.80f, 1.0f, 0.5f);
+            glVertex2f(rainX[i], -40);
+        }
+    }
+    glEnd();
+}
 
 
 void display()
