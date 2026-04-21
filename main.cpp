@@ -641,6 +641,33 @@ void display()
     glFlush();
 }
 
+
+void update(int v)
+{
+    cloudPos  += 0.15f;
+    birdPos   += 0.4f;
+    sunAngle  += 0.03f;
+    waterOffset += 0.35f;
+
+    if (cloudPos  > 220) cloudPos  = -220;
+    if (birdPos   > 200) birdPos   = -200;
+    if (sunAngle  > 200) sunAngle  = -200;
+    if (waterOffset > 10) waterOffset = 0;
+
+    // Rain update
+    for (int i = 0; i < 300; i++)
+    {
+        rainY[i] -= 2.2f;
+        rainX[i] += 0.5f;  // Slight diagonal
+        if (rainY[i] < -100)
+        {
+            rainY[i] = 100;
+            rainX[i] = (float)(rand() % 220) - 110;
+        }
+    }
+
+}
+
 void init()
 {
     glClearColor(1.0, 1.0, 1.0, 1.0);
