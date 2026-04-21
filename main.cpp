@@ -702,12 +702,31 @@ void update(int v)
 
 void init()
 {
-    glClearColor(1.0, 1.0, 1.0, 1.0);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluOrtho2D(-100,100,-100,100);
-}
+    glClearColor(0.5f, 0.8f, 1.0f, 1.0f);
+    gluOrtho2D(-100, 100, -100, 100);
+    srand((unsigned int)time(NULL));
 
+    for (int i = 0; i < 300; i++)
+    {
+        rainX[i] = (float)(rand() % 220) - 110;
+        rainY[i] = (float)(rand() % 200) - 100;
+    }
+
+    for (int i = 0; i < 150; i++)
+    {
+        starX[i] = (float)(rand() % 200) - 100;
+        starY[i] = 20.0f + (float)(rand() % 80);
+        starBright[i] = 0.5f + (float)(rand() % 50) / 100.0f;
+    }
+
+    for (int i = 0; i < 20; i++)
+    {
+        ffX[i] = (float)(rand() % 160) - 80;
+        ffY[i] = (float)(rand() % 40) - 60;
+        ffBright[i] = (float)(rand() % 100) / 100.0f;
+        ffTimer[i] = (float)(rand() % 40) / 10.0f;
+    }
+}
 int main(int argc,char** argv)
 {
     glutInit(&argc,argv);
