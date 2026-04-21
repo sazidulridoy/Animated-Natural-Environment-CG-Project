@@ -53,6 +53,72 @@ void drawEllipse(float cx, float cy, float rx, float ry)
     glEnd();
 }
 
+//sky
+void drawSky()
+{
+    if (!isNight)
+    {
+        // Gradient sky
+        glBegin(GL_QUADS);
+        glColor3f(0.15f, 0.45f, 0.90f);
+        glVertex2f(-100, 100);
+        glVertex2f(100, 100);
+        glColor3f(0.55f, 0.80f, 1.0f);
+        glVertex2f(100, 40);
+        glVertex2f(-100, 40);
+        glEnd();
+
+        glBegin(GL_QUADS);
+        glColor3f(0.55f, 0.80f, 1.0f);
+        glVertex2f(-100, 40);
+        glVertex2f(100, 40);
+        glColor3f(0.80f, 0.92f, 1.0f);
+        glVertex2f(100, 0);
+        glVertex2f(-100, 0);
+        glEnd();
+    }
+    else
+    {
+        // Night sky
+        glBegin(GL_QUADS);
+        glColor3f(0.02f, 0.02f, 0.12f);
+        glVertex2f(-100, 100);
+        glVertex2f(100, 100);
+        glColor3f(0.05f, 0.05f, 0.20f);
+        glVertex2f(100, 0);
+        glVertex2f(-100, 0);
+        glEnd();
+    }
+
+}
+
+//stars
+void drawStars()
+{
+    if (!isNight) return;
+
+    glPointSize(2.0f);
+    glBegin(GL_POINTS);
+    for (int i = 0; i < 150; i++)
+    {
+        float b = starBright[i];
+        glColor3f(b, b, b * 0.95f);
+        glVertex2f(starX[i], starY[i]);
+    }
+    glEnd();
+
+    // A few larger twinkling stars
+    glPointSize(3.0f);
+    glBegin(GL_POINTS);
+    for (int i = 0; i < 15; i++)
+    {
+        float b = starBright[i * 10 % 150];
+        glColor3f(b, b, b);
+        glVertex2f(starX[i * 7 % 150], starY[i * 7 % 150]);
+    }
+    glEnd();
+}
+
 void drawSunMoon()
 {
     if (!isNight)
@@ -94,44 +160,7 @@ void drawSunMoon()
     }
 }
 
-//sky
-void drawSky()
-{
-    if (isNight)
-    {
-        // Gradient sky
-        glBegin(GL_QUADS);
-        glColor3f(0.15f, 0.45f, 0.90f);
-        glVertex2f(-100, 100);
-        glVertex2f(100, 100);
-        glColor3f(0.55f, 0.80f, 1.0f);
-        glVertex2f(100, 40);
-        glVertex2f(-100, 40);
-        glEnd();
 
-        glBegin(GL_QUADS);
-        glColor3f(0.55f, 0.80f, 1.0f);
-        glVertex2f(-100, 40);
-        glVertex2f(100, 40);
-        glColor3f(0.80f, 0.92f, 1.0f);
-        glVertex2f(100, 0);
-        glVertex2f(-100, 0);
-        glEnd();
-    }
-      else
-    {
-        // Night sky
-        glBegin(GL_QUADS);
-        glColor3f(0.02f, 0.02f, 0.12f);
-        glVertex2f(-100, 100);
-        glVertex2f(100, 100);
-        glColor3f(0.05f, 0.05f, 0.20f);
-        glVertex2f(100, 0);
-        glVertex2f(-100, 0);
-        glEnd();
-    }
-
-}
 void drawCloud(float cx, float cy, float scale)
 {
     if (isNight) glColor3f(0.55f, 0.55f, 0.65f);
@@ -159,40 +188,63 @@ void drawClouds()
     drawCloud(-120 + cloudPos, 85, 0.60f);
     drawCloud(80 + cloudPos, 80, 0.85f);
 }
+
 void drawMountains()
 {
     // Far mountains (lighter, atmospheric haze)
     glColor3f(0.55f, 0.52f, 0.60f);
     glBegin(GL_TRIANGLES);
-    glVertex2f(-100, 0); glVertex2f(-45, 55); glVertex2f(10, 0);
-    glVertex2f(-10, 0);  glVertex2f(45, 48);  glVertex2f(100, 0);
+    glVertex2f(-100, 0);
+    glVertex2f(-45, 55);
+    glVertex2f(10, 0);
+    glVertex2f(-10, 0);
+    glVertex2f(45, 48);
+    glVertex2f(100, 0);
     glEnd();
 
     // Near mountains (richer brown)
     glColor3f(0.38f, 0.28f, 0.20f);
     glBegin(GL_TRIANGLES);
-    glVertex2f(-100, 0); glVertex2f(-62, 48); glVertex2f(-22, 0);
-    glVertex2f(-32, 0);  glVertex2f(8, 58);   glVertex2f(48, 0);
-    glVertex2f(18, 0);   glVertex2f(62, 40);  glVertex2f(100, 0);
+    glVertex2f(-100, 0);
+    glVertex2f(-62, 48);
+    glVertex2f(-22, 0);
+    glVertex2f(-32, 0);
+    glVertex2f(8, 58);
+    glVertex2f(48, 0);
+    glVertex2f(18, 0);
+    glVertex2f(62, 40);
+    glVertex2f(100, 0);
     glEnd();
 
     // Rocky detail overlay (slightly lighter mid-tone)
     glColor3f(0.50f, 0.38f, 0.28f);
     glBegin(GL_TRIANGLES);
-    glVertex2f(-75, 10); glVertex2f(-62, 48); glVertex2f(-50, 10);
-    glVertex2f(-10, 8);  glVertex2f(8, 58);   glVertex2f(25, 8);
-    glVertex2f(35, 8);   glVertex2f(62, 40);  glVertex2f(80, 8);
+    glVertex2f(-75, 10);
+    glVertex2f(-62, 48);
+    glVertex2f(-50, 10);
+    glVertex2f(-10, 8);
+    glVertex2f(8, 58);
+    glVertex2f(25, 8);
+    glVertex2f(35, 8);
+    glVertex2f(62, 40);
+    glVertex2f(80, 8);
     glEnd();
 
     // Snow caps
     glColor3f(0.95f, 0.96f, 0.98f);
     glBegin(GL_TRIANGLES);
     // Peak 1
-    glVertex2f(-70, 30); glVertex2f(-62, 48); glVertex2f(-54, 30);
+    glVertex2f(-70, 30);
+    glVertex2f(-62, 48);
+    glVertex2f(-54, 30);
     // Peak 2
-    glVertex2f(0, 40);  glVertex2f(8, 58);  glVertex2f(16, 40);
+    glVertex2f(0, 40);
+    glVertex2f(8, 58);
+    glVertex2f(16, 40);
     // Peak 3 (far)
-    glVertex2f(-50, 38); glVertex2f(-45, 55); glVertex2f(-40, 38);
+    glVertex2f(-50, 38);
+    glVertex2f(-45, 55);
+    glVertex2f(-40, 38);
     glEnd();
 }
 
@@ -215,6 +267,7 @@ void drawFog()
     glVertex2f(-100, 25);
     glEnd();
 }
+
 void drawGround()
 {
     // Rich green with slight gradient
@@ -237,6 +290,7 @@ void drawGround()
                 glVertex2f(i + 0.5f, j + 0.5f);
     glEnd();
 }
+
 void drawRiverBank()
 {
     // Sandy base
@@ -268,6 +322,7 @@ void drawRiverBank()
                 glVertex2f(i, j);
     glEnd();
 }
+
 void drawRiver()
 {
     // Base water
@@ -334,6 +389,7 @@ void drawRiver()
         drawEllipse(0, -30, 12, 3);
     }
 }
+
 void drawWaterEdge()
 {
     glBegin(GL_QUADS);
@@ -381,8 +437,13 @@ void drawEdgeGrass()
 void drawStones()
 {
     // Varied stone colors and sizes
-    struct Stone { float x, y, r; float r1, g1, b1; };
-    Stone stones[] = {
+    struct Stone
+    {
+        float x, y, r;
+        float r1, g1, b1;
+    };
+    Stone stones[] =
+    {
         {-72, -55, 5.0f,  0.50f, 0.48f, 0.46f},
         {-22, -65, 3.5f,  0.45f, 0.43f, 0.41f},
         {28,  -50, 6.0f,  0.52f, 0.50f, 0.48f},
@@ -414,17 +475,23 @@ void drawSmallPlants()
         float base = -60.0f + sin(i * 0.4f) * 3;
         glColor3f(0.05f, 0.50f, 0.05f);
         glBegin(GL_LINES);
-        glVertex2f(i, base);       glVertex2f(i, base + 12);
-        glVertex2f(i, base + 6);   glVertex2f(i - 5, base + 12);
-        glVertex2f(i, base + 6);   glVertex2f(i + 5, base + 12);
+        glVertex2f(i, base);
+        glVertex2f(i, base + 12);
+        glVertex2f(i, base + 6);
+        glVertex2f(i - 5, base + 12);
+        glVertex2f(i, base + 6);
+        glVertex2f(i + 5, base + 12);
         glEnd();
 
         // Second offset plant
         glColor3f(0.10f, 0.45f, 0.10f);
         glBegin(GL_LINES);
-        glVertex2f(i + 6, base - 4); glVertex2f(i + 6, base + 8);
-        glVertex2f(i + 6, base + 3); glVertex2f(i + 3, base + 8);
-        glVertex2f(i + 6, base + 3); glVertex2f(i + 9, base + 8);
+        glVertex2f(i + 6, base - 4);
+        glVertex2f(i + 6, base + 8);
+        glVertex2f(i + 6, base + 3);
+        glVertex2f(i + 3, base + 8);
+        glVertex2f(i + 6, base + 3);
+        glVertex2f(i + 9, base + 8);
         glEnd();
     }
     glLineWidth(1.0f);
@@ -453,8 +520,10 @@ void drawTree(float x, float y)
     glColor3f(0.35f, 0.20f, 0.07f);
     glLineWidth(0.8f);
     glBegin(GL_LINES);
-    glVertex2f(x - 0.5f, y + 2); glVertex2f(x + 0.5f, y + 4);
-    glVertex2f(x - 0.5f, y + 6); glVertex2f(x + 0.5f, y + 8);
+    glVertex2f(x - 0.5f, y + 2);
+    glVertex2f(x + 0.5f, y + 4);
+    glVertex2f(x - 0.5f, y + 6);
+    glVertex2f(x + 0.5f, y + 8);
     glEnd();
     glLineWidth(1.0f);
 
@@ -481,8 +550,12 @@ void drawTree(float x, float y)
 
 void drawBushes()
 {
-    struct Bush { float x, y, s; };
-    Bush bushes[] = {
+    struct Bush
+    {
+        float x, y, s;
+    };
+    Bush bushes[] =
+    {
         {-88, -20, 1.0f},
         {-68, -20, 0.8f},
         {55,  -20, 0.9f},
@@ -606,7 +679,6 @@ void drawRain()
     glEnd();
 }
 
-
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -641,7 +713,6 @@ void display()
     glFlush();
 }
 
-
 void update(int v)
 {
     cloudPos  += 0.15f;
@@ -665,7 +736,7 @@ void update(int v)
             rainX[i] = (float)(rand() % 220) - 110;
         }
     }
- // Star twinkle
+    // Star twinkle
     for (int i = 0; i < 150; i++)
     {
         starBright[i] = 0.5f + 0.5f * sin(v * 0.003f + i * 1.3f);
@@ -727,15 +798,18 @@ void init()
         ffTimer[i] = (float)(rand() % 40) / 10.0f;
     }
 }
-int main(int argc,char** argv)
+
+int main(int argc, char** argv)
 {
-    glutInit(&argc,argv);
+    glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-    glutInitWindowSize(900,600);
-    glutCreateWindow("Animated Natural Environment");
+    glutInitWindowSize(1000, 700);
+    glutCreateWindow("Animated Natural Environment - [D] Day/Night  [R] Rain  [ESC] Exit");
 
     init();
     glutDisplayFunc(display);
+    glutKeyboardFunc(keyboard);
+    glutTimerFunc(0, update, 0);
 
     glutMainLoop();
     return 0;
