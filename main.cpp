@@ -550,7 +550,30 @@ void drawBirds()
     glLineWidth(1.0f);
 }
 
+void drawFireflies()
+{
+    if (!isNight) return;
 
+    glPointSize(3.5f);
+    glBegin(GL_POINTS);
+    for (int i = 0; i < 20; i++)
+    {
+        float b = ffBright[i];
+        glColor4f(0.70f, 1.0f, 0.40f, b);
+        glVertex2f(ffX[i], ffY[i]);
+    }
+    glEnd();
+
+    // Glow rings
+    for (int i = 0; i < 20; i++)
+    {
+        if (ffBright[i] > 0.5f)
+        {
+            glColor4f(0.60f, 0.90f, 0.30f, ffBright[i] * 0.15f);
+            drawCircle(ffX[i], ffY[i], 2.0f);
+        }
+    }
+}
 
 
 
