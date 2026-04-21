@@ -1,6 +1,7 @@
 #include <GL/glut.h>
 #include <math.h>
 #include <stdlib.h>
+#include <time.h>
 
 // Animation variables
 float cloudPos = 0.0f;
@@ -769,6 +770,13 @@ void update(int v)
     glutPostRedisplay();
     glutTimerFunc(16, update, v + 1);
 
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+    if (key == 'd' || key == 'D') isNight = !isNight;
+    if (key == 'r' || key == 'R') isRaining = !isRaining;
+    if (key == 27) exit(0);
 }
 
 void init()
