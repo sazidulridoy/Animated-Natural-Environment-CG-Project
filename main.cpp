@@ -193,17 +193,27 @@ void drawSunMoon()
         drawCircle(sx, sy, 8);
 
         // Sun rays
-        glColor3f(1.0f, 0.90f, 0.20f);
-        glLineWidth(1.5f);
-        glBegin(GL_LINES);
-        for (int i = 0; i < 12; i++)
-        {
-            float a = i * 3.14159f / 6.0f;
-            glVertex2f(sx + cos(a) * 10, sy + sin(a) * 10);
-            glVertex2f(sx + cos(a) * 15, sy + sin(a) * 15);
-        }
-        glEnd();
-        glLineWidth(1.0f);
+        glPushMatrix();
+            glTranslatef(sx, sy, 0.0f);          // Translation: move to sun center
+            glRotatef(sunRotation, 0, 0, 1);      // Rotation: spin rays around Z-axis
+            glColor3f(1.0f, 0.90f, 0.20f);
+            glLineWidth(1.5f);
+            glBegin(GL_LINES);
+            for (int i = 0; i < 12; i++)
+            {
+                float a = i * 3.14159f / 6.0f;
+
+                glVertex2f(cos(a) * 10, sin(a) * 10);
+                glVertex2f(cos(a) * 15, sin(a) * 15);
+            }
+            glEnd();
+            glLineWidth(1.0f);
+
+            glColor4f(1.0f, 0.98f, 0.60f, 0.40f);
+            glPointSize(1.5f);
+            midpointCircle(0.0f, 0.0f, 8.5f);
+            glPopMatrix()
+
     }
     else
     {
