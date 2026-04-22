@@ -220,9 +220,13 @@ void drawSunMoon()
         // Moon
         glColor3f(0.95f, 0.95f, 0.85f);
         drawCircle(75, 82, 7);
-        // Crescent shadow
         glColor3f(0.05f, 0.05f, 0.18f);
         drawCircle(78, 82, 6);
+
+        glColor4f(0.85f, 0.85f, 0.75f, 0.30f);
+        glPointSize(1.5f);
+        midpointCircle(75.0f, 82.0f, 7.2f);
+
     }
 }
 
