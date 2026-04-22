@@ -10,6 +10,7 @@ float birdPos = 0.0f;
 float waterOffset = 0.0f;
 float fogAlpha = 0.0f;
 float timeOfDay = 0.0f;  // 0=day, increases
+float sunRotation = 0.0f;
 
 bool isNight = false;
 bool isRaining = false;
@@ -29,6 +30,7 @@ float ffY[20];
 float ffBright[20];
 float ffTimer[20];
 
+//bresenham
 void bresenhamLine(float x1, float y1, float x2, float y2)
 {
     int ix1 = (int)(x1 * 10);
@@ -54,6 +56,7 @@ void bresenhamLine(float x1, float y1, float x2, float y2)
     glEnd();
 }
 
+// midpoint circle
 void midpointCircle(float cx, float cy, float radius)
 {
     int r = (int)(radius * 10);
@@ -229,7 +232,6 @@ void drawSunMoon()
 
     }
 }
-
 
 void drawCloud(float cx, float cy, float scale)
 {
@@ -618,34 +620,40 @@ void drawTree(float x, float y)
     drawCircle(x + 1.5f, y + 13.5f, 2.0f);
 }
 
+void drawBushLocal()
+{
+    glColor3f(0.06f, 0.40f, 0.06f);
+    drawCircle(0, 0, 5);
+    drawCircle(-4, -1, 3.5f);
+    drawCircle(4, -1, 3.5f);
+
+    glColor3f(0.12f, 0.58f, 0.12f);
+    drawCircle(0, 1, 4);
+    drawCircle(-3, 0, 3);
+    drawCircle(3, 0, 3);
+}
+
 void drawBushes()
 {
-    struct Bush
-    {
-        float x, y, s;
-    };
-    Bush bushes[] =
-    {
-        {-88, -20, 1.0f},
-        {-68, -20, 0.8f},
-        {55,  -20, 0.9f},
-        {85,  -20, 0.75f},
+    struct Bush { float x, y, s; };
+    Bush bushes[] = {
+        {-88, -20, 1.00f},
+        {-68, -20, 0.80f},
+        { 55, -20, 0.90f},
+        { 85, -20, 0.75f},
         {-35, -20, 0.70f},
     };
 
     for (auto& b : bushes)
     {
-        glColor3f(0.06f, 0.40f, 0.06f);
-        drawCircle(b.x, b.y, 5 * b.s);
-        drawCircle(b.x - 4 * b.s, b.y - 1 * b.s, 3.5f * b.s);
-        drawCircle(b.x + 4 * b.s, b.y - 1 * b.s, 3.5f * b.s);
-
-        glColor3f(0.12f, 0.58f, 0.12f);
-        drawCircle(b.x, b.y + 1 * b.s, 4 * b.s);
-        drawCircle(b.x - 3 * b.s, b.y, 3 * b.s);
-        drawCircle(b.x + 3 * b.s, b.y, 3 * b.s);
+        glPushMatrix();
+            glTranslatef(b.x, b.y, 0.0f);   // Translation transformation
+            glScalef(b.s, b.s, 1.0f);        // Scaling transformation
+            drawBushLocal();
+        glPopMatrix();
     }
 }
+
 
 void drawBirds()
 {
