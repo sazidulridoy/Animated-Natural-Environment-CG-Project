@@ -54,6 +54,37 @@ void bresenhamLine(float x1, float y1, float x2, float y2)
     glEnd();
 }
 
+void midpointCircle(float cx, float cy, float radius)
+{
+    int r = (int)(radius * 10);
+    int x = 0;
+    int y = r;
+    int p = 1 - r;   // initial decision parameter
+
+    glBegin(GL_POINTS);
+    while (x <= y)
+    {
+        glVertex2f(cx + x / 10.0f, cy + y / 10.0f);
+        glVertex2f(cx - x / 10.0f, cy + y / 10.0f);
+        glVertex2f(cx + x / 10.0f, cy - y / 10.0f);
+        glVertex2f(cx - x / 10.0f, cy - y / 10.0f);
+        glVertex2f(cx + y / 10.0f, cy + x / 10.0f);
+        glVertex2f(cx - y / 10.0f, cy + x / 10.0f);
+        glVertex2f(cx + y / 10.0f, cy - x / 10.0f);
+        glVertex2f(cx - y / 10.0f, cy - x / 10.0f);
+
+        x++;
+        if (p < 0)
+            p += 2 * x + 1;
+        else
+        {
+            y--;
+            p += 2 * (x - y) + 1;
+        }
+    }
+    glEnd();
+}
+
 void drawCircle(float cx, float cy, float r)
 {
     glBegin(GL_TRIANGLE_FAN);
