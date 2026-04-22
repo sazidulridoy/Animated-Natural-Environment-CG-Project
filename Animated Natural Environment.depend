@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1776705404 source:c:\users\ridoy\documents\cg project\animated natural environment\main.cpp
+1776789906 source:c:\users\ridoy\documents\cg project\animated natural environment\main.cpp
 	<GL/glut.h>
 	<math.h>
 	<stdlib.h>
+	<time.h>
 
 1768490127 c:\program files\codeblocks\mingw\x86_64-w64-mingw32\include\gl\glut.h
 	"freeglut_std.h"
@@ -876,4 +877,20 @@
 
 1526093416 c:\program files\codeblocks\mingw\x86_64-w64-mingw32\include\math.h
 	<crtdefs.h>
+
+1526093414 c:\program files\codeblocks\mingw\x86_64-w64-mingw32\include\time.h
+	<crtdefs.h>
+	<_timeval.h>
+	<sys/timeb.h>
+	<pthread_time.h>
+
+1526093414 c:\program files\codeblocks\mingw\x86_64-w64-mingw32\include\sys\timeb.h
+	<crtdefs.h>
+	<sec_api/sys/timeb_s.h>
+
+1526093414 c:\program files\codeblocks\mingw\x86_64-w64-mingw32\include\sec_api\sys\timeb_s.h
+	<sys/timeb.h>
+
+1526093420 c:\program files\codeblocks\mingw\x86_64-w64-mingw32\include\pthread_time.h
+	<sys/timeb.h>
 

@@ -29,6 +29,30 @@ float ffY[20];
 float ffBright[20];
 float ffTimer[20];
 
+void bresenhamLine(float x1, float y1, float x2, float y2)
+{
+    int ix1 = (int)(x1 * 10);
+    int iy1 = (int)(y1 * 10);
+    int ix2 = (int)(x2 * 10);
+    int iy2 = (int)(y2 * 10);
+
+    int dx = abs(ix2 - ix1);
+    int dy = abs(iy2 - iy1);
+    int sx = (ix1 < ix2) ? 1 : -1;
+    int sy = (iy1 < iy2) ? 1 : -1;
+    int err = dx - dy;
+
+    glBegin(GL_POINTS);
+    while (true)
+    {
+        glVertex2f(ix1 / 10.0f, iy1 / 10.0f);
+        if (ix1 == ix2 && iy1 == iy2) break;
+        int e2 = 2 * err;
+        if (e2 > -dy) { err -= dy; ix1 += sx; }
+        if (e2 <  dx) { err += dx; iy1 += sy; }
+    }
+    glEnd();
+}
 
 void drawCircle(float cx, float cy, float r)
 {
