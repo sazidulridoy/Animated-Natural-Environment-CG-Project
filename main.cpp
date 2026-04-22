@@ -50,8 +50,16 @@ void bresenhamLine(float x1, float y1, float x2, float y2)
         glVertex2f(ix1 / 10.0f, iy1 / 10.0f);
         if (ix1 == ix2 && iy1 == iy2) break;
         int e2 = 2 * err;
-        if (e2 > -dy) { err -= dy; ix1 += sx; }
-        if (e2 <  dx) { err += dx; iy1 += sy; }
+        if (e2 > -dy)
+        {
+            err -= dy;
+            ix1 += sx;
+        }
+        if (e2 <  dx)
+        {
+            err += dx;
+            iy1 += sy;
+        }
     }
     glEnd();
 }
@@ -197,25 +205,25 @@ void drawSunMoon()
 
         // Sun rays
         glPushMatrix();
-            glTranslatef(sx, sy, 0.0f);          // Translation: move to sun center
-            glRotatef(sunRotation, 0, 0, 1);      // Rotation: spin rays around Z-axis
-            glColor3f(1.0f, 0.90f, 0.20f);
-            glLineWidth(1.5f);
-            glBegin(GL_LINES);
-            for (int i = 0; i < 12; i++)
-            {
-                float a = i * 3.14159f / 6.0f;
+        glTranslatef(sx, sy, 0.0f);          // Translation: move to sun center
+        glRotatef(sunRotation, 0, 0, 1);      // Rotation: spin rays around Z-axis
+        glColor3f(1.0f, 0.90f, 0.20f);
+        glLineWidth(1.5f);
+        glBegin(GL_LINES);
+        for (int i = 0; i < 12; i++)
+        {
+            float a = i * 3.14159f / 6.0f;
 
-                glVertex2f(cos(a) * 10, sin(a) * 10);
-                glVertex2f(cos(a) * 15, sin(a) * 15);
-            }
-            glEnd();
-            glLineWidth(1.0f);
+            glVertex2f(cos(a) * 10, sin(a) * 10);
+            glVertex2f(cos(a) * 15, sin(a) * 15);
+        }
+        glEnd();
+        glLineWidth(1.0f);
 
-            glColor4f(1.0f, 0.98f, 0.60f, 0.40f);
-            glPointSize(1.5f);
-            midpointCircle(0.0f, 0.0f, 8.5f);
-            glPopMatrix()
+        glColor4f(1.0f, 0.98f, 0.60f, 0.40f);
+        glPointSize(1.5f);
+        midpointCircle(0.0f, 0.0f, 8.5f);
+        glPopMatrix();
 
     }
     else
@@ -574,14 +582,18 @@ void drawTreeLocal()
     // Root flare
     glColor3f(0.38f, 0.22f, 0.08f);
     glBegin(GL_TRIANGLES);
-    glVertex2f(-2, 0); glVertex2f(2, 0); glVertex2f(-3, -3);
+    glVertex2f(-2, 0);
+    glVertex2f(2, 0);
+    glVertex2f(-3, -3);
     glEnd();
 
     // Trunk
     glColor3f(0.45f, 0.28f, 0.10f);
     glBegin(GL_QUADS);
-    glVertex2f(-1.5f, 0);  glVertex2f(1.5f, 0);
-    glVertex2f(1.2f, 10);  glVertex2f(-1.2f, 10);
+    glVertex2f(-1.5f, 0);
+    glVertex2f(1.5f, 0);
+    glVertex2f(1.2f, 10);
+    glVertex2f(-1.2f, 10);
     glEnd();
 
     // Bresenham lines for bark texture
@@ -615,8 +627,8 @@ void drawTreeLocal()
 void drawTree(float x, float y)
 {
     glPushMatrix();
-        glTranslatef(x, y, 0.0f);
-        drawTreeLocal();
+    glTranslatef(x, y, 0.0f);
+    drawTreeLocal();
     glPopMatrix();
 }
 
@@ -635,8 +647,12 @@ void drawBushLocal()
 
 void drawBushes()
 {
-    struct Bush { float x, y, s; };
-    Bush bushes[] = {
+    struct Bush
+    {
+        float x, y, s;
+    };
+    Bush bushes[] =
+    {
         {-88, -20, 1.00f},
         {-68, -20, 0.80f},
         { 55, -20, 0.90f},
@@ -647,9 +663,9 @@ void drawBushes()
     for (auto& b : bushes)
     {
         glPushMatrix();
-            glTranslatef(b.x, b.y, 0.0f);   // Translation transformation
-            glScalef(b.s, b.s, 1.0f);        // Scaling transformation
-            drawBushLocal();
+        glTranslatef(b.x, b.y, 0.0f);   // Translation transformation
+        glScalef(b.s, b.s, 1.0f);       // Scaling transformation
+        drawBushLocal();
         glPopMatrix();
     }
 }
@@ -797,11 +813,13 @@ void update(int v)
     birdPos   += 0.4f;
     sunAngle  += 0.03f;
     waterOffset += 0.35f;
+    sunRotation += 0.3f;
 
     if (cloudPos  > 220) cloudPos  = -220;
     if (birdPos   > 200) birdPos   = -200;
     if (sunAngle  > 200) sunAngle  = -200;
     if (waterOffset > 10) waterOffset = 0;
+    if (sunRotation >= 360.0f) sunRotation = 0.0f;
 
     // Rain update
     for (int i = 0; i < 300; i++)
